@@ -87,7 +87,6 @@
       "storageAccountName":"[concat(uniquestring(resourceGroup().id), 'olvm')]",
       "imagePublisher":"Oracle",
       "imageOffer":"Oracle-Linux",
-      "imageSku" :"Oracle:Oracle-Linux:7.3:7.3.20190529",
       "nicName":"olvmNIC",
       "addressPrefix":"10.0.0.0/16",
       "subnetName":"Subnet",
