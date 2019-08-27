@@ -209,7 +209,7 @@
                   "publisher":"[variables('imagePublisher')]",
                   "offer":"[variables('imageOffer')]",
                   "sku":"[parameters('linuxOSVersion')]",
-                  "version":"7.3.20190529"
+                  "version":"latest"
                },
                "osDisk":{
                   "createOption":"FromImage"
