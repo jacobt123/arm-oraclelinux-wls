@@ -192,7 +192,7 @@
          "dependsOn":[
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
             "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-            "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName')))
+            "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
          ],
          "properties":{
             "ipConfigurations":[
