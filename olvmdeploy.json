@@ -97,6 +97,7 @@
       "vmName":"WebLogicServerVM",
       "vmSize":"[parameters('vmSizeSelect')]",
       "virtualNetworkName":"olvmVNET",
+      "networkSecurityGroupName": "olvmNET-nsg",
       "ScriptFolder": "scripts",
       "ScriptFileName": "installWeblogic.sh",
       "linuxConfiguration":{
@@ -113,6 +114,30 @@
       "subnetRef":"[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]"
    },
    "resources":[
+      {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2018-11-01",
+      "name": "[variables('networkSecurityGroupName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "ssh_rule",
+            "properties": {
+              "description": "Locks inbound down to ssh default port 22.",
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "22",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 123,
+              "direction": "Inbound"
+            }
+          }
+        ]
+      }
+    },
       {
          "type":"Microsoft.Storage/storageAccounts",
          "apiVersion":"2018-11-01",
@@ -166,7 +191,8 @@
          "location":"[parameters('location')]",
          "dependsOn":[
             "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-            "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+            "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+            "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))
          ],
          "properties":{
             "ipConfigurations":[
